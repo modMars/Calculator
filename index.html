@@ -9,31 +9,30 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
     </style> 
+    <script src="app.js" defer></script>
 </head>
 <body>
     <div class="container">
         <div class="calculator">
-            <span class="display">
-                0123456789
-            </span>
-            <button class="digit toprow special">CLEAR</button>
-            <button class="digit toprow special">DELETE</button>
-            <button class="digit">7</button>
-            <button class="digit">8</button>
-            <button class="digit">9</button>
-            <button class="digit" id="bot">/</button>
-            <button class="digit">4</button>
-            <button class="digit">5</button>
-            <button class="digit">6</button>
-            <button class="digit">x</button>
-            <button class="digit">1</button>
-            <button class="digit">2</button>
-            <button class="digit">3</button>
-            <button class="digit">-</button>
-            <button class="digit" id="bot">0</button>
-            <button class="digit" id="bot" id=".">.</button>
-            <button class="digit" >+</button>
-            <button class="digit special">=</button>
+            <div class="display"></div>
+            <button class="digit toprow special" id="clear">CLEAR</button>
+            <button class="digit toprow special" id="delete">DELETE</button>
+            <button class="digit" data-num="">7</button>
+            <button class="digit" data-num="">8</button>
+            <button class="digit" data-num="">9</button>
+            <button class="digit" id="bot" data-op="">/</button>
+            <button class="digit" data-num="">4</button>
+            <button class="digit" data-num="">5</button>
+            <button class="digit" data-num="">6</button>
+            <button class="digit" data-op="">*</button>
+            <button class="digit" data-num="">1</button>
+            <button class="digit" data-num="">2</button>
+            <button class="digit" data-num="">3</button>
+            <button class="digit" data-op="">-</button>
+            <button class="digit" data-num="" id="bot">0</button>
+            <button class="digit" id="bot" data-op="">.</button>
+            <button class="digit" data-op="" >+</button>
+            <button class="digit special" id="equal">=</button>
         </div>
     </div>
     <footer>
