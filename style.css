@@ -1,0 +1,92 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    /* outline: auto; */
+}
+
+html {
+    font-size: 62.95%
+}
+
+body{
+    display:flex;
+    flex-flow: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+.container{
+    position: relative;
+    display:flex;
+    background-color: #333;
+    width: 600px; /*780px*/
+    height: 820px; /*920px*/
+    justify-content: center;
+    align-items: flex-end;
+    border-radius: 20px;
+}
+
+.calculator{
+    position: absolute;
+    top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 0;
+    width: 530px; /*700px*/
+    height: 750px; /*850px*/
+    border-radius: 40px;
+    color: #000;
+}
+
+.digit {
+    font-size: 22px;
+    flex: 1 1 125px; /*flex: 1 1 175px*/
+    height: 125px; /*150px*/
+    background-color: #444;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    margin: 3px;
+    /* border-radius: 10px; */
+}
+
+.digit:hover{
+    background-color: #555;
+}
+
+.display{
+    font-size: 74px;
+    flex-basis: 100%;
+    display: block;
+    height: 100px; /*150px*/
+    text-align: center;
+    line-height: 100px;
+    background-color: #a3baaa;
+    border-radius: 20px;
+    /* border-radius: 40px; */
+    margin-bottom: 5px;
+    font-family: 'Space Mono', monospace;
+}
+
+.toprow{
+    flex: 1 250px; /*1 350px*/
+    height: 80px; /*80px*/
+    border-radius: 10px;
+}
+
+.special{
+    background-color: #ff8000;
+}
+
+.special:hover{
+    background-color: #ff9000;
+}
+
+footer{
+    position: absolute;
+    top: 95vh;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+}
