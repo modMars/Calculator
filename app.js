@@ -36,6 +36,11 @@ function operate(num1,op,num2){
         case '/':
         result = n1/n2
         ClearDisplay();
+        if(n1 === 0 || n2 === 0)
+        {
+            alert("Stop playing with fire kid!")
+            return;
+        }
         if(isInt(result) == false)
         {
             result = result.toFixed(3);
@@ -65,7 +70,7 @@ function ClearDisplay(){
 function DeleteDisplay(){
     display.textContent = display.textContent.slice(0,-1);
 }
-//This function is used as a callback function on my 'equal' event listener
+//This function is used as a callback function on the 'equal' event listener as well as the operators event listener
 function operatorCallback(){
     let str = display.textContent
     let array = str.split(/([*+/-])/g)
@@ -73,7 +78,7 @@ function operatorCallback(){
         operate(array[0],array[1],array[2])
     else //Todo flashing syntax error message.
     {
-        alert("error");
+        alert("ERROR");
     }
 }
 //This function appends a point to the display
@@ -121,7 +126,13 @@ num.forEach(e => {
 
 op.forEach(e => {
     e.addEventListener('click',(e) =>{
-        operator = (e.target.textContent);
+    operator = (e.target.textContent);
+    if(display.textContent.match(/([*+/-])/g) != null)
+    {
+        DeleteDisplay();
+        display.append(operator);
+        return;
+    }
     if(display.textContent != '')
         {
             if(display.textContent.match(/([*+/-])/g) == null)
