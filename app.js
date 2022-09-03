@@ -10,51 +10,102 @@ function operate(num1,op,num2){
     switch(op)
     {
         case '+':
+        result = n1+n2
         ClearDisplay();
-        display.textContent = n1+n2;
+        if(isInt(result) == false)
+        {
+            result = result.toFixed(3);
+        }
+        displayResult.textContent = `${n1} \+ ${n2} \= ${result}`
+        display.textContent = result;
         break;
+
         case '-':
+        result = n1-n2
         ClearDisplay();
-        display.textContent = n1-n2;
+        if(isInt(result) == false)
+        {
+            result = result.toFixed(3);
+        }
+        displayResult.textContent = `${n1} \- ${n2} \= ${result}`
+        display.textContent = result;
         break;
+
         case '/':
+        result = n1/n2
         ClearDisplay();
-        display.textContent = n1/n2;
+        if(isInt(result) == false)
+        {
+            result = result.toFixed(3);
+        }
+        displayResult.textContent = `${n1} \/ ${n2} \= ${result}`
+        display.textContent = result;
         break;
+
         case '*':
+        result = n1*n2
         ClearDisplay();
-        display.textContent = n1*n2;
+        if(isInt(result) == false)
+        {
+            result = result.toFixed(3);
+        }
+        displayResult.textContent = `${n1} \* ${n2} \= ${result}`
+        display.textContent = result;
         break;
     }
 }
 function ClearDisplay(){
     display.textContent = '';
+    displayResult.textContent = '';
 }
 
 function DeleteDisplay(){
     display.textContent = display.textContent.slice(0,-1);
 }
 
-function findOperator(){
-    
+function operatorCallback(){
+    let str = display.textContent
+    let array = str.split(/([*+/-])/g)
+    if(array.length == 3)
+    operate(array[0],array[1],array[2])
+    else //Todo flashing syntax error message.
+    {
+        alert("error");
+    }
+}
+
+function addPoint(num1,op,num2){
+    display.append('.');
+}
+
+function isInt(num){
+    if(num % 1 === 0)
+    {
+        return true;
+    }
+    else 
+    {
+        return false;
+    }
 }
 
 var input = "";
 var operator = "";
 const num = document.querySelectorAll('[data-num]');
 const op = document.querySelectorAll('[data-op]');
-const display = document.querySelector('.display');
+const display = document.querySelector('.displayTextbox');
+const displayResult =  document.querySelector('.result');
 const clear = document.getElementById('clear');
 const del = document.getElementById('delete')
 const equal = document.getElementById('equal');
+const point = document.getElementById('point');
 
 num.forEach(e => {
     e.addEventListener('click', (e) => {
         input = (e.target.textContent);
-        if(display.textContent.length < 11)
+        if(display.textContent.length < 38)
         {
             display.append(input);
-            console.log(display.textContent)
         }
         else
         return
@@ -64,15 +115,19 @@ num.forEach(e => {
 op.forEach(e => {
     e.addEventListener('click',(e) =>{
         operator = (e.target.textContent);
-        console.log(display.textContent);
     if(display.textContent != '')
         {
-            if(display.textContent.match(/([\*-\/])/g) == null)
+            if(display.textContent.match(/([*+/-])/g) == null)
             {
-                if(display.textContent.length < 11)
+                if(display.textContent.length < 38)
                 display.append(operator);
                 else
                 return
+            }
+            else
+            {
+                operatorCallback();
+                display.append(e.target.textContent);
             }
         }
         else 
@@ -82,13 +137,5 @@ op.forEach(e => {
 
 clear.addEventListener('click',ClearDisplay);
 del.addEventListener('click',DeleteDisplay)
-equal.addEventListener('click', (e) => {
-    var str = display.textContent
-    var array = str.split(/([\*-\/])/g)
-    if(array.length == 3)
-    operate(array[0],array[1],array[2])
-    else //Todo flashing syntax error message.
-    {
-        alert("error");
-    }
-})
+point.addEventListener('click', addPoint)
+equal.addEventListener('click', operatorCallback)

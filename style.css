@@ -11,31 +11,29 @@ html {
 
 body{
     display:flex;
-    flex-flow: column;
     height: 100vh;
     align-items: center;
     justify-content: center;
 }
 
 .container{
-    position: relative;
     display:flex;
     background-color: #333;
-    width: 600px; /*780px*/
-    height: 820px; /*920px*/
+    width: 600px; /*600px*/
+    min-height: 820px; /*820px*/
     justify-content: center;
-    align-items: flex-end;
+    align-items: center;
     border-radius: 20px;
 }
 
 .calculator{
-    position: absolute;
-    top: 40px;
+    /* position: relative;
+    bottom: 40px; */
     display: flex;
     flex-wrap: wrap;
     font-size: 0;
     width: 530px; /*700px*/
-    height: 750px; /*850px*/
+    min-height: 750px; /*850px*/
     border-radius: 40px;
     color: #000;
 }
@@ -57,17 +55,29 @@ body{
 }
 
 .display{
-    font-size: 74px;
-    flex-basis: 100%;
-    display: block;
-    height: 100px; /*150px*/
-    text-align: center;
-    line-height: 100px;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 100px;
+    max-width: 530px;
     background-color: #a3baaa;
     border-radius: 20px;
-    /* border-radius: 40px; */
     margin-bottom: 5px;
+    font-size: 35px; /*45px*/
+    padding-right: 15px;
     font-family: 'Space Mono', monospace;
+    text-align: right;
+    line-height: 40px;
+}
+
+.display .result{
+    flex: 1 1 100%;
+    font-size: 20px;
+    padding-left: 20px;
+}
+
+.display .displayTextbox{
+    inline-size:515px;
+    overflow-wrap: break-word;
 }
 
 .toprow{
