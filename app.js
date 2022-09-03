@@ -5,7 +5,27 @@ multiply
 divide*/
 
 function operate(num1,op,num2){
-    console.log('operate')
+    n1 = Number(num1);
+    n2 = Number(num2);
+    switch(op)
+    {
+        case '+':
+        ClearDisplay();
+        display.textContent = n1+n2;
+        break;
+        case '-':
+        ClearDisplay();
+        display.textContent = n1-n2;
+        break;
+        case '/':
+        ClearDisplay();
+        display.textContent = n1/n2;
+        break;
+        case '*':
+        ClearDisplay();
+        display.textContent = n1*n2;
+        break;
+    }
 }
 function ClearDisplay(){
     display.textContent = '';
@@ -65,11 +85,10 @@ del.addEventListener('click',DeleteDisplay)
 equal.addEventListener('click', (e) => {
     var str = display.textContent
     var array = str.split(/([\*-\/])/g)
-    console.log(array.length)
     if(array.length == 3)
     operate(array[0],array[1],array[2])
     else //Todo flashing syntax error message.
     {
-        display.
+        alert("error");
     }
 })
