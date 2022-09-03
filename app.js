@@ -76,10 +76,6 @@ function operatorCallback(){
     let array = str.split(/([*+/-])/g)
     if(array.length == 3)
         operate(array[0],array[1],array[2])
-    else //Todo flashing syntax error message.
-    {
-        alert("ERROR");
-    }
 }
 //This function appends a point to the display
 function addPoint(num1,op,num2){
