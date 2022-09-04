@@ -39,7 +39,7 @@ function operate(num1,op,num2){
         ClearDisplay();
         if(n1 === 0 || n2 === 0)
         {
-            let words = ["STOP IT NOW", "That's just irresponsible", "HOW DARE YOU?", "Wooo infinity!", "I don't like you."]
+            let words = ["STOP IT NOW", "That's just irresponsible", "HOW DARE YOU?", "Wooo infinity!", "I don't like you.", "Infinity crashing is not a joke Jim!"]
             
             display.textContent = words[Math.floor(Math.random()*words.length)]
             setTimeout(() => {ClearDisplay()},2000)
