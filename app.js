@@ -70,21 +70,30 @@ function ClearDisplay(){
     display.textContent = '';
     displayResult.textContent = '';
 }
+
+function ClearMain(){
+    display.textContent = '';
+}
 //This function will delete the last character in the display
 function DeleteDisplay(){
     display.textContent = display.textContent.slice(0,-1);
 }
 //This function is used as a callback function on the 'equal' event listener as well as the operators event listener
 function operatorCallback(){
+    wipe = true;
     point.classList.remove('disabled');
-    let str = display.textContent
-    let array = str.split(/([*+/-])/g)
-    if(array[2] != "")
-    {
-        if(array.length === 3)
-        operate(array[0],array[1],array[2])
-    }
-    else return
+    array = Array.from(displayResult.textContent);
+    let slic = array.slice(0, -1)
+    let num1 = [];
+    slic.forEach(element => {
+        num1 += element;
+    });
+    num1 = Number(num1)
+    console.log(num1,array[array.length-1],display.textContent)
+    operate(num1, array[array.length-1], display.textContent);
+    // operate(str, array[operator], display.textContent);
+
+        // operate()
 }
 //This function appends a point to the display, if it finds a point in either of the sides of the operation it will disable the point button by adding a class name to it.
 function addPoint(num1,op,num2){
@@ -122,11 +131,16 @@ function isInt(num){
     }
 }
 
-
+function buffer(){
+    displayResult.textContent = display.textContent;
+    ClearMain();
+}
 /**********************************MAIN****************************************/
 //Variable Declaration
 var input = "";
 var operator = "";
+var isPopulated = false;
+var wipe;
 const num = document.querySelectorAll('[data-num]');
 const op = document.querySelectorAll('[data-op]');
 const display = document.querySelector('.displayTextbox');
@@ -147,30 +161,34 @@ num.forEach(e => {
         else
         return
     });
+
 });
 
 op.forEach(e => {
     e.addEventListener('click',(e) =>{
     operator = (e.target.textContent);
     let str = display.textContent
-    let array = str.split(/([*+/-])/g)
-    if(display.textContent != '')
+    let strResult = displayResult.textContent;
+    console.log(operator);
+
+        if(str == "" && operator == "-")
         {
-            if(display.textContent.match(/([*+/-])/g) == null)
-            {
-                if(display.textContent.length < 38)
-                display.append(operator);
-            }
-            else if(display.textContent.match(/([*+/-])/g) != null)
-            {
-                operatorCallback();
-                DeleteDisplay();
-                display.append(operator)
-                return;
-            }
+            display.append(operator);
         }
-        else 
-        return;
+        if(str === '' || str === '.' || str ==='-')
+        {
+            return;
+        }
+        else if(wipe === false)
+        {
+            operatorCallback();
+        }
+        if(str != "" || strResult === "")
+        {
+            display.append(operator);
+            buffer();
+            wipe = false;
+        }
     })
 })
 
