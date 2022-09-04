@@ -9,6 +9,7 @@ divide*/
 function operate(num1,op,num2){
     n1 = Number(num1);
     n2 = Number(num2);
+
     switch(op)
     {
         case '+':
@@ -18,7 +19,7 @@ function operate(num1,op,num2){
         {
             result = result.toFixed(3);
         }
-        displayResult.textContent = `${n1} \+ ${n2} \= ${result}`
+        displayResult.textContent = `${n1} \+ ${n2} \=`
         display.textContent = result;
         break;
 
@@ -29,7 +30,7 @@ function operate(num1,op,num2){
         {
             result = result.toFixed(3);
         }
-        displayResult.textContent = `${n1} \- ${n2} \= ${result}`
+        displayResult.textContent = `${n1} \- ${n2} \=`
         display.textContent = result;
         break;
 
@@ -45,7 +46,7 @@ function operate(num1,op,num2){
         {
             result = result.toFixed(3);
         }
-        displayResult.textContent = `${n1} \/ ${n2} \= ${result}`
+        displayResult.textContent = `${n1} \/ ${n2} \=`
         display.textContent = result;
         break;
 
@@ -56,7 +57,7 @@ function operate(num1,op,num2){
         {
             result = result.toFixed(3);
         }
-        displayResult.textContent = `${n1} \* ${n2} \= ${result}`
+        displayResult.textContent = `${n1} \* ${n2} \=`
         display.textContent = result;
         break;
     }
@@ -72,14 +73,35 @@ function DeleteDisplay(){
 }
 //This function is used as a callback function on the 'equal' event listener as well as the operators event listener
 function operatorCallback(){
+    point.classList.remove('disabled');
     let str = display.textContent
     let array = str.split(/([*+/-])/g)
     if(array.length == 3)
         operate(array[0],array[1],array[2])
 }
-//This function appends a point to the display
+//This function appends a point to the display, if it finds a point in either of the sides of the operation it will disable the point button by adding a class name to it.
 function addPoint(num1,op,num2){
-    display.append('.');
+    let array = display.textContent.split((/([*+/-])/g));
+    console.log(array)
+    if(array[2] === undefined)
+    {
+        if(array[0].includes('.'))
+        {
+            point.classList.add('disabled');
+            return;
+        }
+        else
+        display.append('.');
+    }
+    else if(array[2] != undefined)
+    {
+        if(array[2].includes('.'))
+        {
+            point.classList.add('disabled');
+        }
+        else
+        display.append('.');
+    }
 }
 //This function returns false if the parameter has decimal points
 function isInt(num){
@@ -123,12 +145,6 @@ num.forEach(e => {
 op.forEach(e => {
     e.addEventListener('click',(e) =>{
     operator = (e.target.textContent);
-    if(display.textContent.match(/([*+/-])/g) != null)
-    {
-        DeleteDisplay();
-        display.append(operator);
-        return;
-    }
     if(display.textContent != '')
         {
             if(display.textContent.match(/([*+/-])/g) == null)
@@ -138,10 +154,11 @@ op.forEach(e => {
                 else
                 return
             }
-            else
+            else if(display.textContent.match(/([*+/-])/g) != null)
             {
                 operatorCallback();
                 display.append(e.target.textContent);
+                return;
             }
         }
         else 
