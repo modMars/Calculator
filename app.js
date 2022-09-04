@@ -39,7 +39,10 @@ function operate(num1,op,num2){
         ClearDisplay();
         if(n1 === 0 || n2 === 0)
         {
-            alert("Stop playing with fire kid!")
+            let words = ["STOP IT NOW", "That's just irresponsible", "HOW DARE YOU?", "Wooo infinity!", "I don't like you."]
+            
+            display.textContent = words[Math.floor(Math.random()*words.length)]
+            setTimeout(() => {ClearDisplay()},2000)
             return;
         }
         if(isInt(result) == false)
@@ -76,8 +79,12 @@ function operatorCallback(){
     point.classList.remove('disabled');
     let str = display.textContent
     let array = str.split(/([*+/-])/g)
-    if(array.length == 3)
+    if(array[2] != "")
+    {
+        if(array.length === 3)
         operate(array[0],array[1],array[2])
+    }
+    else return
 }
 //This function appends a point to the display, if it finds a point in either of the sides of the operation it will disable the point button by adding a class name to it.
 function addPoint(num1,op,num2){
@@ -145,19 +152,20 @@ num.forEach(e => {
 op.forEach(e => {
     e.addEventListener('click',(e) =>{
     operator = (e.target.textContent);
+    let str = display.textContent
+    let array = str.split(/([*+/-])/g)
     if(display.textContent != '')
         {
             if(display.textContent.match(/([*+/-])/g) == null)
             {
                 if(display.textContent.length < 38)
                 display.append(operator);
-                else
-                return
             }
             else if(display.textContent.match(/([*+/-])/g) != null)
             {
                 operatorCallback();
-                display.append(e.target.textContent);
+                DeleteDisplay();
+                display.append(operator)
                 return;
             }
         }
